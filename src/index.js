@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App.js';
+import Detalle from './components/DetalleFranquisia.jsx';
 import './assets/css/index.css';
 
 ReactDOM.render(
-  <App />,
+  <Detalle />,
   document.getElementById('root')
 );
