@@ -7,6 +7,7 @@ var FranchiseStore = Reflux.createStore({
   listenables: [FranchiseAction],
   franchise: Object,
   franchisePopUp: Object,
+  response: Object,
 
   init: function()
   { 
@@ -36,7 +37,17 @@ var FranchiseStore = Reflux.createStore({
     this.trigger(this.franchisePopUp);  
   },
 
+  listarMesasFranquisia: function(){
 
+  },
+
+  guardarReserva: function(Reserva){
+
+  },
+
+  validarReserva: function(Reserva){
+
+  },
 
 });
 
