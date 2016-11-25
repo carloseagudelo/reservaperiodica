@@ -3,6 +3,8 @@ import Reflux from 'reflux';
 import FranchiseStore from '../stores/FranchiseStore.js';
 import franchiseAction from '../actions/FranchiseAction.js';
 import Modal from 'react-modal';
+import DateTime from'react-datetime';
+
 
 var PopUpReserva = React.createClass({
   
@@ -69,7 +71,7 @@ var PopUpReserva = React.createClass({
                 </label>
                 <label>
                   Hora de llegada:
-                  <input type="datetime" value={this.state.horaini} onChange={this.changeHoraIni}/>
+                  <DateTime />
                 </label>
                 <label>
                   Hora de finalización:
