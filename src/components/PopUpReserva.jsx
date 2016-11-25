@@ -62,7 +62,6 @@ var PopUpReserva = React.createClass({
       modalIsOpen: false
     });
   },
-
 });
 
 export default PopUpReserva;

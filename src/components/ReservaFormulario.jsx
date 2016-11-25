@@ -3,18 +3,20 @@ import Reflux from 'reflux';
 import FranchiseStore from '../stores/FranchiseStore.js';
 import franchiseAction from '../actions/FranchiseAction.js'
 import Modal from 'react-modal';
+import moment from 'moment';
 import DateTime from'react-datetime';
 
-
 var ReservaFormulario = React.createClass({
+
+	mixins: [Reflux.connect(FranchiseStore, 'franchisestore')],
 
   getInitialState: function () {
     return {
       periodicidad: '',
       mesa: '',
       multiplicador: '',
-      horaini: Date,
-      horafin: Date,
+      horaini: moment().format("M D YYYY HH:mm:ss"),
+      horafin: moment().format("M D YYYY HH:mm:ss"),
       cantidaper: '',
       reserva: {},
     };
@@ -22,7 +24,7 @@ var ReservaFormulario = React.createClass({
 
   render: function() {
   	return(
-  	<form onSubmit={this.guardarReserva}>
+  	<form onSubmit={this.guardarRese}>
 	  <label>
 	    Seleccione la periodicidad:
 	    <select value={this.state.periodicidad} onChange={this.chandePeriodicidad}>
@@ -51,26 +53,23 @@ var ReservaFormulario = React.createClass({
 	  </label>
 	  <label>
 	    Hora de llegada:
-	    <DateTime  
-	      selected={this.state.horaini}
-	      onChange={this.changeHoraIni}/>
+	    <DateTime />
 	  </label>
 	  <label>
 	    Hora de finalización:
-	    <DateTime 
-	      selected={this.state.horafin}
-	      onChange={this.changeHoraFin}/>
+	    <DateTime />
 	  </label>
 	 <label>
 	    Cantidad de personas:
 	    <input type="number" value={this.state.cantidaper} onChange={this.changeCantidadPer} />
-	  </label>
-	  <input type="submit" value="Reservar"/>
+	  </label>	 
+	   <input type="submit" value="Registrar"/>
 	</form> 
+	
 	);
   },
 
-chandePeriodicidad: function (e){  
+  chandePeriodicidad: function (e){  
     this.setState({
       periodicidad: e.target.value 
     })
@@ -88,7 +87,7 @@ chandePeriodicidad: function (e){
     })
   },
 
- changeHoraIni: function (e){ 
+  changeHoraIni: function (e){ 
     this.setState({
       horaini: e.target.value 
     })
@@ -106,12 +105,17 @@ chandePeriodicidad: function (e){
     })
   },
 
-  guardarReserva: function(){
+  guardarRese: function(){
     this.reserva = {user_restaurant: this.state.franchisestore.franchise_id, table_restaurant: this.state.mesa, 
                       date_init: this.state.horaini, date_end: this.state.horafin, amount_people: this.state.cantidaper, state: 0};
-    console.log(this.reserva);
-    alert(this.reserva);
-    //franchiseAction.guardarReserva(this.reserva);
+    franchiseAction.guardarReserva(this.reserva);
+    console.log(this.state.franchisestore);
+    if(this.state.franchisestore){
+    	alert('Reserva realizada con éxito');
+    }
+    else{
+    	alert('No se pudo realizar la reserva');
+    }    	
   },
 
 });

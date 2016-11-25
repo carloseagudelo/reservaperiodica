@@ -7,7 +7,7 @@ var FranchiseStore = Reflux.createStore({
   listenables: [FranchiseAction],
   franchise: Object,
   franchisePopUp: Object,
-  response: Object,
+  response: String,
 
   init: function()
   { 
@@ -41,8 +41,26 @@ var FranchiseStore = Reflux.createStore({
 
   },
 
-  guardarReserva: function(Reserva){
-
+  guardarReserva: function(reserva){
+    $.ajax({
+        async: true,
+        crossDomain: true,
+        url: 'https://restaurants-udea-soft.herokuapp.com/reservations',
+        method: 'GET',  
+        data: JSON.stringify(reserva),     
+        headers: {
+          'content-type': 'application/json',
+          cache: false,
+        },     
+        success: function(data) {
+          this.response = data; 
+          this.trigger(this.response);       
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+          console.log("Status: " + textStatus); 
+          console.log("Error: " + errorThrown); 
+        } 
+    });
   },
 
   validarReserva: function(Reserva){
