@@ -69,11 +69,11 @@ var PopUpReserva = React.createClass({
                 </label>
                 <label>
                   Hora de llegada:
-                  <input type="text" value={this.state.horaini} onChange={this.changeHoraIni}/>
+                  <input type="datetime" value={this.state.horaini} onChange={this.changeHoraIni}/>
                 </label>
                 <label>
                   Hora de finalización:
-                  <input type="text" value={this.state.horafin} onChange={this.changeHoraFin}/>
+                  <input type="datetime" value={this.state.horafin} onChange={this.changeHoraFin}/>
                 </label>
                <label>
                   Cantidad de personas:
