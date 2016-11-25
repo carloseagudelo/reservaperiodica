@@ -9,6 +9,7 @@ var DetalleFranquisia = React.createClass({
   mixins: [Reflux.connect(FranchiseStore, 'franchisestore')],
 
   render: function() {
+    console.log(this.state.franchisestore);
     if(this.state.franchisestore){
       return (
         React.createElement('form', {className: 'form-group'},
@@ -51,7 +52,7 @@ var DetalleFranquisia = React.createClass({
           }),
 
           React.createElement('input', {
-            type: 'submit',
+            type: 'button',
             value: 'Reserva Periodica',
             className: 'btn-primary',
             onClick: this.handleClick,
@@ -61,14 +62,13 @@ var DetalleFranquisia = React.createClass({
     }
     else{
       return (
-        <div>No se encontro la información de la frnaquicia</div>
+        <div>No se encontro la información de la franquicia</div>
       )
     }
   },
 
   handleClick: function(){
-      alert('Evento del boton');
-      franchiseAction.handleClick();
+      franchiseAction.handleClick(this.state.franchisestore.id_franchise);
   },
 
 });

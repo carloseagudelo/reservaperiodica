@@ -8,30 +8,35 @@ var PopUpReserva = React.createClass({
   mixins: [Reflux.connect(FranchiseStore, 'franchisestore')],
  
   render: function() {
-    return (
-      <div>
-        <button onClick={this.openModal}>Open Modal</button>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal} > 
+    if(this.state.franchisestore){
+      return (
+        <div>
+          <Modal
+            isOpen={this.state.franchisestore.click}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal} > 
 
-          <div className="modal-header">
-           	Realizar reserva periodica                    
-            <a href="javascript: void 0;"
-              style={{float: "right", textDecoration: "none"}}
-              onClick={this.closeModal}>
-              &#215;
-            </a>
-          </div>
+            <div className="modal-header">
+             	Realizar reserva periodica                    
+              <a href="javascript: void 0;"
+                style={{float: "right", textDecoration: "none"}}
+                onClick={this.closeModal}>
+                &#215;
+              </a>
+            </div>
 
-          <div className="modal-body">
-            
-          </div>
+            <div className="modal-body">              
+            </div>
 
-        </Modal>
-      </div>
-    );
+          </Modal>
+        </div>
+      );
+    }
+    else{
+      return (
+        <div>No se encontro la información de la franquicia</div>
+        );
+    }
   },
 
   getInitialState: function() {
@@ -41,7 +46,9 @@ var PopUpReserva = React.createClass({
   },
  
   openModal: function() {
-    this.setState({modalIsOpen: true});
+    this.setState({
+      modalIsOpen: this.state.franchisestore.click
+    });
   },
  
   afterOpenModal: function() {
@@ -50,7 +57,9 @@ var PopUpReserva = React.createClass({
   },
  
   closeModal: function() {
-    this.setState({modalIsOpen: false});
+    this.setState({
+      modalIsOpen: false
+    });
   },
 
 });

@@ -5,12 +5,12 @@ import FranchiseAction from '../actions/FranchiseAction';
 var FranchiseStore = Reflux.createStore({
 
   listenables: [FranchiseAction],
-  franquice: Object,
-  click: Boolean,
+  franchise: Object,
+  franchisePopUp: Object,
 
   init: function()
   { 
-    this.handleClick();
+    this.obtenerFranquicia();
   },
 
   obtenerFranquicia: function(){
@@ -21,8 +21,8 @@ var FranchiseStore = Reflux.createStore({
       	cache: false,
       	context: this,    	
   		  success: function(data) {
-          this.franquice = data[0]; 
-          this.trigger(this.franquice);       
+          this.franchise = data[0]; 
+          this.trigger(this.franchise);       
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) { 
           console.log("Status: " + textStatus); 
@@ -31,8 +31,9 @@ var FranchiseStore = Reflux.createStore({
 	  });
   },
 
-  handleClick: function() {
-    this.click =  true;       
+  handleClick: function(franchise_id) {
+    this.franchisePopUp = { franchise_id: franchise_id, click: true };
+    this.trigger(this.franchisePopUp);  
   },
 
 
