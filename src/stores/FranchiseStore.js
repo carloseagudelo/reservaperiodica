@@ -6,10 +6,11 @@ var FranchiseStore = Reflux.createStore({
 
   listenables: [FranchiseAction],
   franquice: Object,
+  click: Boolean,
 
   init: function()
   { 
-    this.obtenerFranquicia();
+    this.handleClick();
   },
 
   obtenerFranquicia: function(){
@@ -27,8 +28,14 @@ var FranchiseStore = Reflux.createStore({
           console.log("Status: " + textStatus); 
           console.log("Error: " + errorThrown); 
         } 
-	});
+	  });
   },
+
+  handleClick: function() {
+    this.click =  true;       
+  },
+
+
 
 });
 

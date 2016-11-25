@@ -1,6 +1,8 @@
 import React from 'react';
 import Reflux from 'reflux';
 import FranchiseStore from '../stores/FranchiseStore.js';
+import franchiseAction from '../actions/FranchiseAction.js';
+
 
 var DetalleFranquisia = React.createClass({
 
@@ -17,7 +19,6 @@ var DetalleFranquisia = React.createClass({
             className: 'form-control', 
             value: this.state.franchisestore.name_franchise,
             onClick: this.validar,
-            //onChange: this.nameChange,
           }),
 
           React.createElement("label", {className: "label"}, 'Direccion'),
@@ -25,7 +26,6 @@ var DetalleFranquisia = React.createClass({
             type: 'text',
             value: this.state.franchisestore.address,
             className: 'form-control',       
-            //onChange: this.RestauranteChange,
           }),
 
 
@@ -34,30 +34,27 @@ var DetalleFranquisia = React.createClass({
             type: 'text',
             value: this.state.franchisestore.phone,
             className: 'form-control',      
-            //onChange: this.resChange,
           }),
 
           React.createElement("label", {className: "label"}, 'Horario en semana'),
           React.createElement('input', {
             type: 'text',
-            value: 'Desde: ' + this.state.franchisestore.open_time_week + '  Hasta: ' + this.state.franchisestore.close_time_week,
+            value: 'Desde: ' + this.state.franchisestore.open_time_week +  'am' + '  Hasta: ' + this.state.franchisestore.close_time_week+ 'pm',
             className: 'form-control',      
-            //onChange: this.resChange,
           }),
 
           React.createElement("label", {className: "label"}, 'Horario Fin de semana'),
           React.createElement('input', {
             type: 'text',
-            value: 'Desde: ' + this.state.franchisestore.open_time_weekend + '  Hasta: ' + this.state.franchisestore.close_time_weekend,
+            value: 'Desde: ' + this.state.franchisestore.open_time_weekend + 'am' +  '  Hasta: ' + this.state.franchisestore.close_time_weekend+ 'pm',
             className: 'form-control',      
-            //onChange: this.resChange,
           }),
 
           React.createElement('input', {
             type: 'submit',
             value: 'Reserva Periodica',
-            //onClick: this.guardarClic,
             className: 'btn-primary',
+            onClick: this.handleClick,
           }) ,
         )
       )
@@ -67,6 +64,11 @@ var DetalleFranquisia = React.createClass({
         <div>No se encontro la información de la frnaquicia</div>
       )
     }
+  },
+
+  handleClick: function(){
+      alert('Evento del boton');
+      franchiseAction.handleClick();
   },
 
 });
